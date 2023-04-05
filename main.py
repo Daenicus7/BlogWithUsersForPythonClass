@@ -192,9 +192,10 @@ def add_new_post():
     return render_template("make-post.html", form=form, logged_in=current_user.is_authenticated)
 
 
-@app.route("/edit-post/<int:post_id>", methods=['GET', 'POST'])
+@app.route("/edit-post", methods=['GET', 'POST'])
 @admin_only
-def edit_post(post_id):
+def edit_post():
+    post_id = request.args.get("post_id")
     post = BlogPost.query.get(post_id)
     edit_form = CreatePostForm(
         title=post.title,
@@ -215,7 +216,7 @@ def edit_post(post_id):
     return render_template("make-post.html", form=edit_form, logged_in=current_user.is_authenticated)
 
 
-@app.route("/delete/")
+@app.route("/delete")
 @admin_only
 def delete_post():
     post_id = request.args.get("post_id")
