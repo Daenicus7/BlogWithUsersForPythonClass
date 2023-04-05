@@ -76,8 +76,8 @@ class Comment(db.Model):
     text = db.Column(db.Text, nullable=False)
 
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 def admin_only(function):
