@@ -215,7 +215,7 @@ def edit_post(post_id):
     return render_template("make-post.html", form=edit_form, logged_in=current_user.is_authenticated)
 
 
-@app.route("/delete/<post_id>")
+@app.route("/delete/<int:post_id>")
 @admin_only
 def delete_post(post_id):
     post_to_delete = BlogPost.query.get(post_id)
