@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from functools import wraps
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
@@ -217,7 +217,8 @@ def edit_post(post_id):
 
 @app.route("/delete/<int:post_id>")
 @admin_only
-def delete_post(post_id):
+def delete_post():
+    post_id = request.args.get('post_id')
     post_to_delete = BlogPost.query.get(post_id)
     db.session.delete(post_to_delete)
     db.session.commit()
